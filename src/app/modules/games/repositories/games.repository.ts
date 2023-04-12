@@ -1,4 +1,11 @@
-import { IBaseRepository } from '@common/base/repository'
-import { Game } from '../entities/game.entity'
+import {
+	BaseRepository 
+} from 'infra/database/typeorm/repositories/base.repository'
+import {
+	IGamesRepository 
+} from '../interfaces/game.interface'
+import {
+	Game 
+} from '../entities/game.entity'
 
-export abstract class IGamesRepository extends IBaseRepository<Game>{}
+export class GamesRepository extends BaseRepository<Game> implements IGamesRepository {}

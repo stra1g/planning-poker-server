@@ -1,4 +1,9 @@
-import { IGamesRepository } from '../../repositories/games.repository'
+import {
+	inject 
+} from 'tsyringe'
+import {
+	IGamesRepository 
+} from '../../interfaces/game.interface'
 
 type CreateGameRequest = {
   name: string
@@ -6,7 +11,10 @@ type CreateGameRequest = {
 }
 
 export class CreateGameService {
-	constructor(private readonly gamesRepository: IGamesRepository) {}
+	constructor(
+    @inject('GamesRepository')
+    private readonly gamesRepository: IGamesRepository
+	) {}
 
 	public async run({ name, voting_type }: CreateGameRequest) {	
 		await this.gamesRepository.store({

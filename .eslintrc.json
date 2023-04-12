@@ -37,6 +37,12 @@
         "@typescript-eslint/no-unused-vars": "error",
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1}],
         "object-curly-spacing": ["off"],
-        "@typescript-eslint/object-curly-spacing": ["error", "always"]
+        "@typescript-eslint/object-curly-spacing": ["error", "always"],
+        "object-curly-newline": ["error", {
+          "ObjectExpression": "always",
+          "ObjectPattern": { "multiline": true },
+          "ImportDeclaration": "always",
+          "ExportDeclaration": { "multiline": true, "minProperties": 10 }
+       }]
     }
 }
