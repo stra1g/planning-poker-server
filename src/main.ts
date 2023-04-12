@@ -5,8 +5,14 @@ import {
 } from '@helpers/logger.helper'
 import '@infra/database/typeorm/datasource.provider'
 import '@providers/tsyringe/tsyringe.provider'
+import {
+	router 
+} from '@infra/http/routes/routes'
 
 const app = express()
+
+app.use(express.json())
+app.use(router)
 
 const port = process.env.PORT || 3333
 

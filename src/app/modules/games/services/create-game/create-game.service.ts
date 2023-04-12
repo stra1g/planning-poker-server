@@ -1,5 +1,5 @@
 import {
-	inject 
+	inject, injectable 
 } from 'tsyringe'
 import {
 	IGamesRepository 
@@ -10,6 +10,7 @@ type CreateGameRequest = {
   voting_type: string
 }
 
+@injectable()
 export class CreateGameService {
 	constructor(
     @inject('GamesRepository')
@@ -17,7 +18,11 @@ export class CreateGameService {
 	) {}
 
 	public async run({ name, voting_type }: CreateGameRequest) {	
-		await this.gamesRepository.store({
+		// await this.gamesRepository.store({
+		// 	name,
+		// 	voting_type
+		// })
+		console.log({
 			name,
 			voting_type
 		})
