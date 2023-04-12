@@ -1,5 +1,5 @@
 import {
-	PartialModelObject
+	PartialModelObject, QueryBuilderType, SingleQueryBuilder
 } from 'objection'
 import {
 	BaseEntity 
@@ -13,7 +13,9 @@ export type Params<T> = {
   }
 }
 
+export type SingleInstance<T extends BaseEntity> = SingleQueryBuilder<QueryBuilderType<T>>
+
 export abstract class IBaseRepository<Entity extends BaseEntity> {
-  abstract store(payload: PartialModelObject<Entity>): Promise<Entity>;
-  abstract editById(entityId: string, payload: PartialModelObject<Entity>): Promise<Entity>;
+  abstract store(payload: PartialModelObject<Entity>): Promise<SingleInstance<Entity>>
+  abstract editById(entityId: string, payload: PartialModelObject<Entity>): Promise<SingleInstance<Entity>>
 }
