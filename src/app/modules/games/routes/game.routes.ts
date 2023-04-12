@@ -8,5 +8,6 @@ import {
 const gameRouter = Router()
 
 gameRouter.post('/', new GamesController().store)
+gameRouter.put('/:id', new GamesController().editById)
 
 export { gameRouter }

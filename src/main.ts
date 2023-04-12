@@ -3,8 +3,8 @@ import express from 'express'
 import {
 	logger 
 } from '@helpers/logger.helper'
-import '@infra/database/typeorm/datasource.provider'
 import '@providers/tsyringe/tsyringe.provider'
+import '@infra/database/knex/connection'
 import {
 	router 
 } from '@infra/http/routes/routes'

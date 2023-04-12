@@ -1,11 +1,12 @@
 import {
-	BaseEntity, Entity 
-} from 'typeorm'
+	BaseEntity 
+} from '@infra/database/knex/base/entity/base-entity.entity'
 
-@Entity({
-	name: 'games'
-})
 export class Game extends BaseEntity{
+	static get tableName() {
+		return 'games'
+	}
+
 	public name: string
   
 	public voting_type: string

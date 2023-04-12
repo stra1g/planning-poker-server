@@ -1,24 +1,5 @@
 import {
-	Column, 
-	CreateDateColumn, 
-	DeleteDateColumn, 
-	PrimaryGeneratedColumn, 
-	UpdateDateColumn 
-} from 'typeorm'
+	Model 
+} from 'objection'
 
-export class BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-	public id: string
-
-  @Column()
-  public is_deleted: boolean
-
-  @DeleteDateColumn()
-  public deleted_at: Date
-
-  @CreateDateColumn()
-  public created_at: Date
-
-  @UpdateDateColumn()
-  public updated_at: Date
-}
+export class BaseEntity extends Model{}

@@ -1,11 +1,15 @@
 import {
+	Game 
+} from '../entities/game.entity'
+import {
 	BaseRepository 
-} from 'infra/database/typeorm/repositories/base.repository'
+} from '@infra/database/knex/base/repository/base-repository.repository'
 import {
 	IGamesRepository 
 } from '../interfaces/game.interface'
-import {
-	Game 
-} from '../entities/game.entity'
 
-export class GamesRepository extends BaseRepository<Game> implements IGamesRepository {}
+export class GamesRepository extends BaseRepository<Game> implements IGamesRepository {
+	constructor() {
+		super(Game)
+	}
+}

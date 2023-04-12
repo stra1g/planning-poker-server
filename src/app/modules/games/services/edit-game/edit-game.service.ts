@@ -1,27 +1,28 @@
 import {
-	inject, injectable 
+	inject,
+	injectable 
 } from 'tsyringe'
 import {
 	IGamesRepository 
 } from '../../interfaces/game.interface'
 
-type CreateGameRequest = {
+type EditGameRequest = {
+  game_id: string
   name: string
-  voting_type: string
 }
 
 @injectable()
-export class CreateGameService {
+export class EditGameService {
 	constructor(
     @inject('GamesRepository')
     private readonly gamesRepository: IGamesRepository
 	) {}
 
-	public async run({ name, voting_type }: CreateGameRequest) {	
-		const game = await this.gamesRepository.store({
-			name,
-			voting_type
-		})
+	public async run({ game_id, ...payload }: EditGameRequest) {
+		const game = await this.gamesRepository.editById(
+			game_id,
+			payload
+		)
 
 		return {
 			game 
