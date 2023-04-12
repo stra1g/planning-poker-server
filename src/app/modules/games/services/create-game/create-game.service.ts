@@ -8,6 +8,7 @@ import {
 type CreateGameRequest = {
   name: string
   voting_type: string
+  owner_id: string
 }
 
 @injectable()
@@ -17,10 +18,11 @@ export class CreateGameService {
     private readonly gamesRepository: IGamesRepository
 	) {}
 
-	public async run({ name, voting_type }: CreateGameRequest) {	
+	public async run({ name, voting_type, owner_id }: CreateGameRequest) {	
 		const game = await this.gamesRepository.store({
 			name,
-			voting_type
+			voting_type,
+			owner_id
 		})
 
 		return {

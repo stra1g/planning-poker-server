@@ -2,27 +2,23 @@ import {
 	BaseEntity 
 } from '@infra/database/knex/base/entity/base-entity.entity'
 import {
-	Player 
-} from '@modules/players/entities/player.entity'
+	Game 
+} from '@modules/games/entities/game.entity'
 import {
 	RelationMappings, RelationMappingsThunk 
 } from 'objection'
 
-export class Game extends BaseEntity{
+export class Player extends BaseEntity{
 	static get tableName() {
-		return 'games'
+		return 'players'
 	}
 
 	public name: string
-  
-	public voting_type: string
-
-	public owner_id: string
 
 	static relationMappings: RelationMappings | RelationMappingsThunk = {
-		owner: {
-			relation: Game.BelongsToOneRelation,
-			modelClass: Player,
+		games: {
+			relation: Player.HasManyRelation,
+			modelClass: Game,
 			join: {
 				from: 'games.owner_id',
 				to: 'players.id'
