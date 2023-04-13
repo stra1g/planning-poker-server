@@ -1,2 +1,5 @@
 export * from './edit-game-by-id.validator'
 export * from './store-game.validator'
+export * from './pick-card.validator'
+export * from './join-game.validator'
+export * from './remove-card.validator'

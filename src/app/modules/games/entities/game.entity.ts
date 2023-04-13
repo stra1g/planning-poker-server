@@ -2,6 +2,9 @@ import {
 	BaseEntity 
 } from '@infra/database/knex/base/entity/base-entity.entity'
 import {
+	PlayerCard 
+} from '@modules/players/entities/player-card.entity'
+import {
 	Player 
 } from '@modules/players/entities/player.entity'
 import {
@@ -40,6 +43,14 @@ export class Game extends BaseEntity {
 					to: 'game_players.player_id'
 				},
 				to: 'players.id'
+			}
+		},
+		player_cards: {
+			relation: Game.HasManyRelation,
+			modelClass: PlayerCard,
+			join: {
+				from: 'games.id',
+				to: 'player_cards.game_id'
 			}
 		}
 	}

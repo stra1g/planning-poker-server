@@ -6,8 +6,10 @@ import {
 	socketValidator 
 } from '@infra/socket/validators/socket-validator'
 import {
-	joinGameSchema 
-} from '@modules/games/validators/game/join-game.validator'
+	joinGameSchema,
+	pickCardSchema,
+	removeCardSchema
+} from '@modules/games/validators/game'
 import {
 	container 
 } from 'tsyringe'
@@ -15,11 +17,11 @@ import {
 	JoinGameService 
 } from '@modules/games/services/join-game/join-game.service'
 import {
-	pickCardSchema 
-} from '@modules/games/validators/game/pick-card.validator'
-import {
 	PickCardService 
 } from '@modules/games/services/pick-card/pick-card.service'
+import {
+	RemoveCardService 
+} from '@modules/games/services/remove-card/remove-card.service'
 
 export const gamesController = (socket: Socket, io: Server) => {
 	socket.on('join_game', async (...args) => {
@@ -51,7 +53,19 @@ export const gamesController = (socket: Socket, io: Server) => {
 		})
 	})
 
-	socket.on('remove_card', async (...args) => {})
+	socket.on('remove_card', async (...args) => {
+		const dto = socketValidator.validate(removeCardSchema, args[0])
+
+		if (!dto) return
+
+		await container.resolve(RemoveCardService).run(dto)
+
+		const room = `game:${dto.game_code}}`
+    
+		io.to(room).emit('removed_card', {
+			player_id: dto.player_id
+		})
+	})
 
 	socket.on('reveal_cards_actaion', async (...args) => {})
 }
