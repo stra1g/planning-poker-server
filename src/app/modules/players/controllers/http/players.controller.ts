@@ -8,17 +8,17 @@ import {
 	CreatePlayerService 
 } from '@modules/players/services/create-player/create-player.service'
 import {
-	schema
-} from '@modules/players/validators/player/store-player.validator'
+	storePlayerSchema
+} from '@modules/players/validators/player'
 import {
 	http 
 } from '@infra/http/validators/validator'
 
 export class PlayersController {
 	public async store(request: Request, response: Response): Promise<Response> {
-		const test = http.validate(schema, request.body)
+		const dto = http.validate(storePlayerSchema, request.body)
 
-		const { player } = await container.resolve(CreatePlayerService).run(test)
+		const { player } = await container.resolve(CreatePlayerService).run(dto)
 
 		return response.status(201).json(player)
 	}
