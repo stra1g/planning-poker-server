@@ -8,7 +8,8 @@ import {
 import {
 	joinGameSchema,
 	pickCardSchema,
-	removeCardSchema
+	removeCardSchema,
+	revealCardsSchema
 } from '@modules/games/validators/game'
 import {
 	container 
@@ -22,6 +23,9 @@ import {
 import {
 	RemoveCardService 
 } from '@modules/games/services/remove-card/remove-card.service'
+import {
+	RevealCardsService 
+} from '@modules/games/services/reveal-cards/reveal-cards.service'
 
 export const gamesController = (socket: Socket, io: Server) => {
 	socket.on('join_game', async (...args) => {
@@ -67,5 +71,17 @@ export const gamesController = (socket: Socket, io: Server) => {
 		})
 	})
 
-	socket.on('reveal_cards_actaion', async (...args) => {})
+	socket.on('reveal_cards', async (...args) => {
+		const dto = socketValidator.validate(revealCardsSchema, args[0])
+
+		if (!dto) return null
+
+		const pickedCards = await container.resolve(RevealCardsService).run(dto)
+
+		if (!pickedCards) return null
+
+		const room = `game:${dto.game_code}}`
+
+		io.to(room).emit('revealed_cards', pickedCards)
+	})
 }

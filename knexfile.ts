@@ -18,7 +18,8 @@ const config: { [key: string]: Knex.Config } = {
 			tableName: 'migrations',
 			directory: './src/infra/database/knex/migrations',
 			extension: 'ts'
-		}
+		},
+		debug: true
 	},
 
 	staging: {

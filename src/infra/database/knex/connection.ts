@@ -10,7 +10,8 @@ const knex = Knex({
 		password: 'postgres',
 		user: 'postgres',
 		database: 'planning_poker_db',
-		port: 5432
+		port: 5432,
+		debug: true
 	}
 })
 
