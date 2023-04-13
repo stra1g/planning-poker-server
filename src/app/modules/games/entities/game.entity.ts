@@ -29,6 +29,18 @@ export class Game extends BaseEntity {
 				from: 'games.owner_id',
 				to: 'players.id'
 			}
+		},
+		players: {
+			relation: Game.ManyToManyRelation,
+			modelClass: Player,
+			join: {
+				from: 'games.id',
+				through: {
+					from: 'game_players.game_id',
+					to: 'game_players.player_id'
+				},
+				to: 'players.id'
+			}
 		}
 	}
 }

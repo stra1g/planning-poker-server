@@ -8,7 +8,7 @@ import {
 
 type EditGameRequest = {
   game_id: string
-  name: string
+  name?: string
 }
 
 @injectable()

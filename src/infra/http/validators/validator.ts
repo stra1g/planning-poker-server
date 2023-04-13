@@ -1,19 +1,18 @@
 import {
-	ZodType,
-	z 
+	ZodType
 } from 'zod'
 import {
 	ValidationException 
 } from '../exceptions/ValidationException'
 
-const validate = (schema: ZodType, payload: unknown) => {
+const validate = <T>(schema: ZodType<T>, payload: unknown): T => {
 	const validation = schema.safeParse(payload)
 
 	if (!validation.success) {
 		throw new ValidationException('Wrong informations provided', validation.error.issues)
 	}
 
-	return payload as z.infer<typeof schema>
+	return validation.data
 }
 
 export const http = {

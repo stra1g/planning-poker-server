@@ -1,5 +1,6 @@
 import {
 	IBaseRepository,
+	MaybeSingleInstance,
 	SingleInstance
 } from '@common/base/repository'
 import {
@@ -18,5 +19,13 @@ export class BaseRepository<Entity extends Model> implements IBaseRepository<Ent
 
 	public async editById(entityId: string, payload: PartialModelObject<Entity>): Promise<SingleInstance<Entity>> {
 		return this.orm.query().updateAndFetchById(entityId, payload)
+	}
+
+	public async findById(entityId: string): Promise<MaybeSingleInstance<Entity>> {
+		return this.orm.query().findById(entityId)
+	}
+
+	public async findOneBy(key: string, value: any): Promise<MaybeSingleInstance<Entity>> {
+		return this.orm.query().findOne(key, value)
 	}
 }

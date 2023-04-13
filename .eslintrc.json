@@ -43,6 +43,7 @@
           "ObjectPattern": { "multiline": true },
           "ImportDeclaration": "always",
           "ExportDeclaration": { "multiline": true, "minProperties": 10 }
-       }]
+       }],
+       "@typescript-eslint/no-explicit-any": "off"
     }
 }

@@ -31,6 +31,8 @@ export class CreateGameService {
 			hash
 		})
 
+		await game.$relatedQuery('players').relate(owner_id)
+
 		return {
 			game 
 		}
