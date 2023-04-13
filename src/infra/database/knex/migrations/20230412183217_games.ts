@@ -16,6 +16,7 @@ export async function up(knex: Knex): Promise<void> {
 			.unsigned()
 			.onDelete('CASCADE')
 			.onUpdate('CASCADE')
+		table.string('hash').notNullable()
 
 		table.boolean('is_deleted').defaultTo(false)
 		table.timestamp('deleted_at').nullable().defaultTo(null)

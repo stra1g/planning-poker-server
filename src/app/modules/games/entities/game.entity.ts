@@ -8,7 +8,7 @@ import {
 	RelationMappings, RelationMappingsThunk 
 } from 'objection'
 
-export class Game extends BaseEntity{
+export class Game extends BaseEntity {
 	static get tableName() {
 		return 'games'
 	}
@@ -18,6 +18,8 @@ export class Game extends BaseEntity{
 	public voting_type: string
 
 	public owner_id: string
+
+	public hash: string
 
 	static relationMappings: RelationMappings | RelationMappingsThunk = {
 		owner: {

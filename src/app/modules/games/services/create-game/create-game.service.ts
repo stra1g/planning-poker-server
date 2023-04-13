@@ -4,6 +4,9 @@ import {
 import {
 	IGamesRepository 
 } from '../../interfaces/game.interface'
+import {
+	randomBytes 
+} from 'node:crypto'
 
 type CreateGameRequest = {
   name: string
@@ -19,10 +22,13 @@ export class CreateGameService {
 	) {}
 
 	public async run({ name, voting_type, owner_id }: CreateGameRequest) {	
+		const hash = randomBytes(20).toString('hex')
+
 		const game = await this.gamesRepository.store({
 			name,
 			voting_type,
-			owner_id
+			owner_id,
+			hash
 		})
 
 		return {
