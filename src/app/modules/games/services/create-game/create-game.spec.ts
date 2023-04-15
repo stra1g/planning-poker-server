@@ -38,8 +38,8 @@ describe('Create a game', () => {
 			hash: randomBytes(20).toString('hex'),
 			is_deleted: false,
 			deleted_at: null,
-			created_at: new Date(),
-			updated_at: new Date(),
+			created_at: new Date().toString(),
+			updated_at: new Date().toString(),
 		}
 
 		gamesRepository.store.mockResolvedValue(mockReturn)
@@ -49,5 +49,11 @@ describe('Create a game', () => {
 
 		expect(game).toHaveProperty('id')
 		expect(game).toHaveProperty('hash')
+		expect(game).toHaveProperty('name')
+		expect(game.name).toBe(dto.name)
+		expect(game.voting_type).toBe(dto.voting_type)
+		expect(game.owner_id).toBe(dto.owner_id)
+		expect(game.is_deleted).toBe(false)
+		expect(game.deleted_at).toBeNull()
 	})
 })
