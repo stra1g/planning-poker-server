@@ -17,4 +17,5 @@ export abstract class IGamesRepository extends IBaseRepository<Game>{
   abstract attachPlayerCard(gameId: string, playerId: string, cardValue: string): Promise<void>
   abstract removePlayerCard(gameId: string, playerId: string): Promise<void>
   abstract getPickedCards(gameId: string): Promise<PlayerCard[]>
+  abstract listGamesByPlayer(playerId: string): Promise<Game[]>
 }

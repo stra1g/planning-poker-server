@@ -1,12 +1,15 @@
 import {
 	IBaseRepository,
 	MaybeSingleInstance,
+	Params,
 	SingleInstance
 } from '@common/base/repository'
 import {
 	Model,
 	PartialModelObject,
 	ModelClass,
+	Expression,
+	PrimitiveValue,
 } from 'objection'
 
 export class BaseRepository<Entity extends Model> implements IBaseRepository<Entity>{
@@ -28,4 +31,5 @@ export class BaseRepository<Entity extends Model> implements IBaseRepository<Ent
 	public async findOneBy(key: string, value: any): Promise<MaybeSingleInstance<Entity>> {
 		return this.orm.query().findOne(key, value)
 	}
+
 }

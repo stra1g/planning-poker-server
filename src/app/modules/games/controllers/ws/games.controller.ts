@@ -26,6 +26,9 @@ import {
 import {
 	RevealCardsService 
 } from '@modules/games/services/reveal-cards/reveal-cards.service'
+import {
+	ListGamesByPlayerService 
+} from '@modules/games/services/list-games-by-player/list-games-by-player.service'
 
 export const gamesController = (socket: Socket, io: Server) => {
 	socket.on('join_game', async (...args) => {
@@ -83,5 +86,21 @@ export const gamesController = (socket: Socket, io: Server) => {
 		const room = `game:${dto.game_code}}`
 
 		io.to(room).emit('revealed_cards', pickedCards)
+	})
+
+	socket.on('disconnect', async () => {
+		const playerId = socket.handshake.query.player_id ?? null
+
+		if (!playerId) return
+
+		const { games } = await container.resolve(ListGamesByPlayerService).run(String(playerId))
+
+		games.forEach((game) => {
+			const room = `game:${game.hash}}`
+      
+			io.to(room).emit('player_left', {
+				player_id: playerId
+			})
+		})
 	})
 }

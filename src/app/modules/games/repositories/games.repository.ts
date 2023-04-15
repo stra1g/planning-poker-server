@@ -46,4 +46,10 @@ export class GamesRepository extends BaseRepository<Game> implements IGamesRepos
 
 		return playerCards.map((playerCard) => PlayerCard.fromJson(playerCard))
 	}
+
+	public async listGamesByPlayer(playerId: string): Promise<Game[]> {
+		const games = await this.orm.query().whereExists(this.orm.relatedQuery('players').where('players.id', playerId))
+
+		return games.map((game) => Game.fromJson(game))
+	}
 }
