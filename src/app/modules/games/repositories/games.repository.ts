@@ -8,20 +8,18 @@ import {
 	IGamesRepository 
 } from '../interfaces/game.interface'
 import {
-	Model 
-} from 'objection'
+	Player 
+} from '@modules/players/entities/player.entity'
 
 export class GamesRepository extends BaseRepository<Game> implements IGamesRepository {
 	constructor() {
 		super(Game)
 	}
 
-	public async listPlayers(gameId: string): Promise<Model[]> {
-		return this.orm.relatedQuery('players').for([gameId])
-	}
+	public async findOnePlayer(gameId: string, playerId: string): Promise<Player | undefined> {
+		const player = await this.orm.relatedQuery('players').for([gameId]).where('players.id', playerId).first()
 
-	public async findOnePlayer(gameId: string, playerId: string): Promise<Model | undefined> {
-		return this.orm.relatedQuery('players').for([gameId]).where('players.id', playerId).first()
+		return player ? Player.fromJson(player) : undefined
 	}
 
 	public async attachPlayer(gameId: string, playerId: string): Promise<void> {

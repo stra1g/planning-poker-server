@@ -5,12 +5,11 @@ import {
 	Game 
 } from '../entities/game.entity'
 import {
-	Model 
-} from 'objection'
+	Player 
+} from '@modules/players/entities/player.entity'
 
 export abstract class IGamesRepository extends IBaseRepository<Game>{
-	abstract listPlayers(gameId: string): Promise<Model[]>
-  abstract findOnePlayer(gameId: string, playerId: string): Promise<Model | undefined>
+  abstract findOnePlayer(gameId: string, playerId: string): Promise<Player | undefined>
   abstract attachPlayer(gameId: string, playerId: string): Promise<void>
   abstract attachPlayerCard(gameId: string, playerId: string, cardValue: string): Promise<void>
 }
