@@ -28,10 +28,6 @@ export class PickCardService {
 
 		if (!player) return null
 
-		await player.$relatedQuery('player_cards').insert({
-			card_value,
-			player_id,
-			game_id: foundGame.id
-		})
+		await this.gamesRepository.attachPlayerCard(foundGame.id, player_id, card_value)
 	}
 }
