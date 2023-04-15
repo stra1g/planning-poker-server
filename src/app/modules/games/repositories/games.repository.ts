@@ -10,6 +10,9 @@ import {
 import {
 	Player 
 } from '@modules/players/entities/player.entity'
+import {
+	PlayerCard 
+} from '@modules/players/entities/player-card.entity'
 
 export class GamesRepository extends BaseRepository<Game> implements IGamesRepository {
 	constructor() {
@@ -36,5 +39,11 @@ export class GamesRepository extends BaseRepository<Game> implements IGamesRepos
 
 	public async removePlayerCard(gameId: string, playerId: string): Promise<void> {
 		await this.orm.relatedQuery('player_cards').for([gameId]).delete().where('player_cards.player_id', playerId)
+	}
+
+	public async getPickedCards(gameId: string): Promise<PlayerCard[]> {
+		const playerCards = await this.orm.relatedQuery('player_cards').for([gameId])
+
+		return playerCards.map((playerCard) => PlayerCard.fromJson(playerCard))
 	}
 }

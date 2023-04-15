@@ -27,7 +27,7 @@ export class RevealCardsService {
 
 		if (!player) return null
 
-		const pickedCards = await foundGame.$relatedQuery('player_cards')
+		const pickedCards = await this.gamesRepository.getPickedCards(foundGame.id)
 
 		return {
 			picked_cards: pickedCards
