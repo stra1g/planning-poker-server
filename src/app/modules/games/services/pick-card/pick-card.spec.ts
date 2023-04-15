@@ -10,7 +10,7 @@ import {
 
 type MockGamesRepository = IGamesRepository & { findOneBy: jest.Mock, findOnePlayer: jest.Mock, attachPlayerCard: jest.Mock }
 
-describe('Join game', () => {
+describe('Pick card', () => {
 	let service: PickCardService
 	let gamesRepository: MockGamesRepository
   

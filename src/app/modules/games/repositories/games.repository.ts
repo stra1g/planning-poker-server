@@ -33,4 +33,8 @@ export class GamesRepository extends BaseRepository<Game> implements IGamesRepos
 			game_id: gameId
 		})
 	}
+
+	public async removePlayerCard(gameId: string, playerId: string): Promise<void> {
+		await this.orm.relatedQuery('player_cards').for([gameId]).delete().where('player_cards.player_id', playerId)
+	}
 }

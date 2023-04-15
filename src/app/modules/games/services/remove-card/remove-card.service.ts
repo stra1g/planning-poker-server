@@ -23,6 +23,6 @@ export class RemoveCardService {
 
 		if (!foundGame) return null
 
-		await foundGame.$relatedQuery('player_cards').delete().where('player_cards.player_id', player_id)
+		await this.gamesRepository.removePlayerCard(foundGame.id, player_id)
 	}
 }
