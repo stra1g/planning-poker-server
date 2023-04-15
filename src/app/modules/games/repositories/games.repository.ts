@@ -22,7 +22,7 @@ export class GamesRepository extends BaseRepository<Game> implements IGamesRepos
 	public async findOnePlayer(gameId: string, playerId: string): Promise<Player | undefined> {
 		const player = await this.orm.relatedQuery('players').for([gameId]).where('players.id', playerId).first()
 
-		return player ? Player.fromJson(player) : undefined
+		return player ? player as Player : undefined
 	}
 
 	public async attachPlayer(gameId: string, playerId: string): Promise<void> {
@@ -44,12 +44,12 @@ export class GamesRepository extends BaseRepository<Game> implements IGamesRepos
 	public async getPickedCards(gameId: string): Promise<PlayerCard[]> {
 		const playerCards = await this.orm.relatedQuery('player_cards').for([gameId])
 
-		return playerCards.map((playerCard) => PlayerCard.fromJson(playerCard))
+		return playerCards as PlayerCard[]
 	}
 
 	public async listGamesByPlayer(playerId: string): Promise<Game[]> {
 		const games = await this.orm.query().whereExists(this.orm.relatedQuery('players').where('players.id', playerId))
 
-		return games.map((game) => Game.fromJson(game))
+		return games as Game[]
 	}
 }
