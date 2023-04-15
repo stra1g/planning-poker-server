@@ -44,6 +44,7 @@
           "ImportDeclaration": "always",
           "ExportDeclaration": { "multiline": true, "minProperties": 10 }
        }],
-       "@typescript-eslint/no-explicit-any": "off"
+       "@typescript-eslint/no-explicit-any": "off",
+       "no-mixed-spaces-and-tabs": "off"
     }
 }

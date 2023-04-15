@@ -11,4 +11,5 @@ import {
 export abstract class IGamesRepository extends IBaseRepository<Game>{
 	abstract listPlayers(gameId: string): Promise<Model[]>
   abstract findOnePlayer(gameId: string, playerId: string): Promise<Model | undefined>
+  abstract attachPlayer(gameId: string, playerId: string): Promise<void>
 }

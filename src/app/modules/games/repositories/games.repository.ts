@@ -23,4 +23,8 @@ export class GamesRepository extends BaseRepository<Game> implements IGamesRepos
 	public async findOnePlayer(gameId: string, playerId: string): Promise<Model | undefined> {
 		return this.orm.relatedQuery('players').for([gameId]).where('players.id', playerId).first()
 	}
+
+	public async attachPlayer(gameId: string, playerId: string): Promise<void> {
+		await this.orm.relatedQuery('players').for([gameId]).relate(playerId)
+	}
 }

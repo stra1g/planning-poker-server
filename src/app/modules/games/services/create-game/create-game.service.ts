@@ -31,8 +31,8 @@ export class CreateGameService {
 			hash
 		})
 
-		await game.$relatedQuery('players').relate(owner_id)
-
+		await this.gamesRepository.attachPlayer(game.id, owner_id)
+    
 		return {
 			game 
 		}
