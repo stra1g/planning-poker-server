@@ -23,6 +23,6 @@ export class JoinGameService {
 
 		if (!foundGame) return null
 
-		await foundGame.$relatedQuery('players').relate(player_id)
+		await this.gamesRepository.attachPlayer(foundGame.id, player_id)
 	}
 }
