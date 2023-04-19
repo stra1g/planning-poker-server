@@ -16,6 +16,13 @@
   <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white" />
 </p>
 
+<p align="center">
+  <img src="assets/gif_insomnia.gif" width="75%"/>
+</p>
+<p align="center">
+  <img src="assets/gif_socket.gif" width="75%"/>
+</p>
+
 ## Table of contents
 
 - [Use Cases](#use-cases)
