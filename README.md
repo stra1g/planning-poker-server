@@ -25,11 +25,18 @@
 
 ## Table of contents
 
+- [Database modeling](#database-modeling)
 - [Use Cases](#use-cases)
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Running the app](#running-the-app)
 - [Tests](#tests)
+
+## Database modeling
+
+<p align="center">
+  <img src="assets/diagram.png"/>
+</p>
 
 ## Use Cases
 
