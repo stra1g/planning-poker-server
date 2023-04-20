@@ -28,6 +28,7 @@
 - [Database modeling](#database-modeling)
 - [Use Cases](#use-cases)
 - [Technologies](#technologies)
+- [Setup](#setup)
 - [Installation](#installation)
 - [Running the app](#running-the-app)
 - [Tests](#tests)
@@ -57,10 +58,18 @@
 - Docker / Docker Compose
 - Jest
 
+# Setup
+
+```
+$ docker-compose up -d
+$ cp .env.example .env
+```
+
 ## Installation
 
 ```bash
 $ npm install
+or
 $ yarn
 ```
 
@@ -68,6 +77,7 @@ $ yarn
 
 ```bash
 $ npm run start:dev
+or
 $ yarn start:dev
 ```
 
@@ -75,6 +85,7 @@ $ yarn start:dev
 
 ```bash
 $ npm run test
+or
 $ yarn test
 ```
 
